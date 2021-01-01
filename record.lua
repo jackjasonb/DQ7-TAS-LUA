@@ -10,6 +10,7 @@ local function stop(frame)
 end
 
 local function mainloop()
+    console.log(STOP_FRAME)
     local file = io.open("movie.csv", "w")
     local frame = 0
     while stop(frame) do
