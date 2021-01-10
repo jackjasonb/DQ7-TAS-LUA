@@ -67,6 +67,6 @@ function getTime()
     --msec
     msec = math.floor(frame / 60 * 100)
 
-    time = string.format("%2d:%2d:%2d:%2d", hour, min, sec, msec)
+    time = string.format("%02d:%02d:%02d.%02d", hour, min, sec, msec)
     return time
 end

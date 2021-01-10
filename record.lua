@@ -1,26 +1,44 @@
 require "utils"
 
-STOP_FRAME = 100
+START_FRAME = 0
+STOP_FRAME = 91440
+
+local function start(frame)
+    if frame == START_FRAME then
+        return false
+    end
+    return true
+end
 
 local function stop(frame)
-    if frame + 1 == STOP_FRAME then
+    if frame == STOP_FRAME then
         return false
     end
     return true
 end
 
 local function mainloop()
-    console.log(STOP_FRAME)
+    console.log("start frame: " .. START_FRAME)
+    console.log("stop frame: " .. STOP_FRAME)
+    local frame = emu.framecount()
+
+    while start(frame) do
+        emu.frameadvance()
+    end
+
     local file = io.open("movie.csv", "w")
-    local frame = 0
+    console.log("file open")
     while stop(frame) do
         frame = emu.framecount()
         local time = getTime()
         local r_number = getRNum()
-        file:write(frame .. "," .. time .. "," .. r_number .. "\n")
+        local pos_x = getPosX()
+        local pos_z = getPosZ()
+        file:write(frame .. "," .. time .. "," .. r_number .. "," .. pos_x .. "," .. pos_z .. "\n")
         emu.frameadvance()
     end
     file:close()
+    console.log("file close")
 end
 
 mainloop()

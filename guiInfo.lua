@@ -4,11 +4,11 @@ GUI = {
     form_controls = {},
     form_padding = 8,
     form_width = 17,
-    form_height = 10,
-    label_offset = 5,
+    form_height = 20,
+    label_offset = 10,
     dropdown_offset = 1,
     long_label_width = 140,
-    button_height = 23
+    button_height = 30
 }
 
 local function round(num, idp)
@@ -49,28 +49,7 @@ function GUI:initGUI()
         GUI.button_height
     )
 
-    row = row + 1
-    -- time
-    GUI.form_controls["Time Label"] =
-        forms.label(
-        FORM,
-        "Time: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
-    GUI.form_controls["Time Value"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
-
-    row = row + 1
+    row = row + 2
     -- frame
     GUI.form_controls["Frame Label"] =
         forms.label(
@@ -92,14 +71,37 @@ function GUI:initGUI()
     )
 
     row = row + 1
+    -- time
+    GUI.form_controls["Time Label"] =
+        forms.label(
+        FORM,
+        "Time: ",
+        GUI:col(0),
+        GUI:row(row) + GUI.label_offset,
+        GUI:col(GUI.form_width / 2) - GUI.label_offset,
+        GUI.button_height
+    )
+    GUI.form_controls["Time Value"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(GUI.form_width / 2) + GUI.label_offset,
+        GUI:row(row) + GUI.label_offset,
+        GUI:col(GUI.form_width / 2) - GUI.label_offset,
+        GUI.button_height
+    )
+
+    BOX = forms.pictureBox(FORM, 0, 0, GUI:col(GUI.form_width), GUI:row(row) + GUI.label_offset)
+
+    row = row + 2
     -- Position
     GUI.form_controls["X Label"] =
-        forms.label(FORM, "X:", GUI:col(0), GUI:row(row) + GUI.label_offset, 20, GUI.button_height)
+        forms.label(FORM, "X:", GUI:col(0), GUI:row(row) + GUI.label_offset, 30, GUI.button_height)
     GUI.form_controls["X Value"] =
         forms.label(
         FORM,
         blank,
-        20 + GUI.label_offset,
+        30 + GUI.label_offset,
         GUI:row(row) + GUI.label_offset,
         GUI:col(GUI.form_width / 4) - GUI.label_offset,
         GUI.button_height
@@ -110,40 +112,18 @@ function GUI:initGUI()
         "Z:",
         GUI:col(GUI.form_width / 2) + GUI.label_offset,
         GUI:row(row) + GUI.label_offset,
-        20,
+        30,
         GUI.button_height
     )
     GUI.form_controls["Z Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + 20 + GUI.label_offset,
+        GUI:col(GUI.form_width / 2) + 30 + GUI.label_offset,
         GUI:row(row) + GUI.label_offset,
         GUI:col(GUI.form_width / 4) - GUI.label_offset,
         GUI.button_height
     )
-
-    row = row + 1
-    -- encount walk
-    GUI.form_controls["Encount Label"] =
-        forms.label(
-        FORM,
-        "Encount: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
-    GUI.form_controls["Encount Value"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
-
     row = row + 1
     -- Camera
     GUI.form_controls["Camera Label"] =
@@ -156,6 +136,26 @@ function GUI:initGUI()
         GUI.button_height
     )
     GUI.form_controls["Camera Value"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(GUI.form_width / 2) + GUI.label_offset,
+        GUI:row(row) + GUI.label_offset,
+        GUI:col(GUI.form_width / 2) - GUI.label_offset,
+        GUI.button_height
+    )
+    row = row + 1
+    -- encount walk
+    GUI.form_controls["Encount Label"] =
+        forms.label(
+        FORM,
+        "Encount Walk: ",
+        GUI:col(0),
+        GUI:row(row) + GUI.label_offset,
+        GUI:col(GUI.form_width / 2) - GUI.label_offset,
+        GUI.button_height
+    )
+    GUI.form_controls["Encount Value"] =
         forms.label(
         FORM,
         blank,
@@ -179,3 +179,7 @@ local function mainloop()
 end
 
 event.onframeend(mainloop, "test")
+
+while true do
+    emu.frameadvance()
+end
