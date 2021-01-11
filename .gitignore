@@ -271,3 +271,6 @@ luac.out
 ./ScriptHawk
 ./ScriptHawk/**
 *.csv
+!script/
+!script/**
+
