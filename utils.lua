@@ -1,5 +1,7 @@
 -- written by jackjasonb
 
+require "item"
+
 ADDRESS = {
     R_NUM = 0x0F9BA0,
     POS_X = 0x0C7020,
@@ -10,8 +12,18 @@ ADDRESS = {
     ENEMY_1_HP = 0x0E5BBA,
     ENEMY_2_HP = 0x0E5C66,
     ENEMY_3_HP = 0x0E5D12,
-    ENEMY_4_HP = 0x0E5DBE
+    ENEMY_4_HP = 0x0E5DBE,
+    ARUS_ITEM_1 = 0x010C48,
+    KIEFER_ITEM_1 = 0x010D54,
+    MARIBEL_ITEM_1 = 0x010E60,
+    GABO_ITEM_1 = 0x010F6C,
+    MELVIN_ITEM_1 = 0x011184,
+    AIRA_ITEM_1 = 0x011078
 }
+
+function dec2hex(input)
+    return string.format("%04x", input)
+end
 
 function getRNum()
     return string.format("%x", memory.read_u32_le(ADDRESS.R_NUM))
@@ -69,4 +81,33 @@ function getTime()
 
     time = string.format("%02d:%02d:%02d.%02d", hour, min, sec, msec)
     return time
+end
+
+function get_items(address)
+    local items = {}
+    local equip = false
+    for i = 0, 11 do
+        local item = memory.read_u16_le(address + i * 2)
+        -- アイテム装備時はアイテムの値に0x0400が加算される
+        if item > 1024 then
+            item = item - 1024
+            equip = true
+        end
+        item = "i" .. string.format("%04X", item)
+        if equip then
+            table.insert(items, "E:" .. ITEM[item])
+        else
+            table.insert(items, "  " .. ITEM[item])
+        end
+        equip = false
+    end
+    return items
+end
+
+function table2str(table)
+    local table_str = ""
+    for i = 1, #table do
+        table_str = table_str .. table[i] .. "\n"
+    end
+    return table_str
 end

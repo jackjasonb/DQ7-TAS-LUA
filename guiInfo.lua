@@ -2,13 +2,13 @@ require "utils"
 
 GUI = {
     form_controls = {},
-    form_padding = 8,
-    form_width = 17,
-    form_height = 20,
-    label_offset = 10,
+    form_padding = 4,
+    form_width = 32,
+    form_height = 12,
+    label_margin = 5,
     dropdown_offset = 1,
-    long_label_width = 140,
-    button_height = 30
+    label_width = 20,
+    button_height = 18
 }
 
 local function round(num, idp)
@@ -20,149 +20,230 @@ function GUI:row(row_num)
 end
 
 function GUI:col(col_num)
-    return self:row(col_num)
+    return round(self.form_padding + self.label_width * col_num, 0)
+end
+
+function GUI:width(col_num)
+    return round(self.label_width * col_num, 0)
+end
+
+function GUI:height(row_num)
+    return round(self.button_height * row_num, 0)
 end
 
 function GUI:initGUI()
-    local blank = "undifined"
-    local row = 0
-
     FORM = forms.newform(GUI:col(GUI.form_width), GUI:row(GUI.form_height), "DQ7 Info")
 
+    local blank = "undefined"
+    local row = 0
+    local left_form_width = GUI.form_width / 7
     -- random number
     GUI.form_controls["R Number Label"] =
-        forms.label(
-        FORM,
-        "R_NUM: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
+        forms.label(FORM, "R_NUM: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
     GUI.form_controls["R Number Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
     )
 
     row = row + 2
     -- frame
     GUI.form_controls["Frame Label"] =
-        forms.label(
-        FORM,
-        "Frame: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
+        forms.label(FORM, "Frame: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
     GUI.form_controls["Frame Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
     )
 
     row = row + 1
     -- time
     GUI.form_controls["Time Label"] =
-        forms.label(
-        FORM,
-        "Time: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
+        forms.label(FORM, "Time: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
     GUI.form_controls["Time Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
     )
-
-    BOX = forms.pictureBox(FORM, 0, 0, GUI:col(GUI.form_width), GUI:row(row) + GUI.label_offset)
 
     row = row + 2
     -- Position
     GUI.form_controls["X Label"] =
-        forms.label(FORM, "X:", GUI:col(0), GUI:row(row) + GUI.label_offset, 30, GUI.button_height)
+        forms.label(FORM, "X:", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 8), GUI:height(1))
     GUI.form_controls["X Value"] =
         forms.label(
         FORM,
         blank,
-        30 + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 4) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width / 8),
+        GUI:row(row),
+        GUI:col(left_form_width / 4),
+        GUI:height(1)
     )
     GUI.form_controls["Z Label"] =
         forms.label(
         FORM,
         "Z:",
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        30,
-        GUI.button_height
+        GUI:col(left_form_width * 3 / 8) + GUI.form_padding,
+        GUI:row(row),
+        GUI:width(left_form_width / 8),
+        GUI:height(1)
     )
     GUI.form_controls["Z Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + 30 + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 4) - GUI.label_offset,
-        GUI.button_height
-    )
-    row = row + 1
-    -- Camera
-    GUI.form_controls["Camera Label"] =
-        forms.label(
-        FORM,
-        "Camera: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
-    GUI.form_controls["Camera Value"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width * 1 / 2) + GUI.form_padding * 2,
+        GUI:row(row),
+        GUI:width(left_form_width / 4),
+        GUI:height(1)
     )
     row = row + 1
     -- encount walk
     GUI.form_controls["Encount Label"] =
-        forms.label(
-        FORM,
-        "Encount Walk: ",
-        GUI:col(0),
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
-    )
+        forms.label(FORM, "Encount Walk: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
     GUI.form_controls["Encount Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(GUI.form_width / 2) + GUI.label_offset,
-        GUI:row(row) + GUI.label_offset,
-        GUI:col(GUI.form_width / 2) - GUI.label_offset,
-        GUI.button_height
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
+    )
+    row = row + 1
+    -- Camera
+    GUI.form_controls["Camera Label"] =
+        forms.label(FORM, "Camera: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+    GUI.form_controls["Camera Value"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
+    )
+
+    local right_form_width = GUI.form_width - left_form_width
+    GUI.form_controls["Arus Items Label"] =
+        forms.label(
+        FORM,
+        "Arus Items",
+        GUI:col(left_form_width) + GUI.form_padding,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Arus Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width) + GUI.form_padding,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
+    )
+    GUI.form_controls["Kiefer Items Label"] =
+        forms.label(
+        FORM,
+        "Kiefer Items",
+        GUI:col(left_form_width + right_form_width / 6) + GUI.form_padding * 2,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Kiefer Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width + right_form_width / 6) + GUI.form_padding * 2,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
+    )
+    GUI.form_controls["Maribel Items Label"] =
+        forms.label(
+        FORM,
+        "Maribel Items",
+        GUI:col(left_form_width + right_form_width * 2 / 6) + GUI.form_padding * 3,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Maribel Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width + right_form_width * 2 / 6) + GUI.form_padding * 3,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
+    )
+    GUI.form_controls["Gabo Items Label"] =
+        forms.label(
+        FORM,
+        "Gabo Items",
+        GUI:col(left_form_width + right_form_width * 3 / 6) + GUI.form_padding * 4,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Gabo Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width + right_form_width * 3 / 6) + GUI.form_padding * 4,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
+    )
+    GUI.form_controls["Melvin Items Label"] =
+        forms.label(
+        FORM,
+        "Melvin Items",
+        GUI:col(left_form_width + right_form_width * 4 / 6) + GUI.form_padding * 5,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Melvin Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width + right_form_width * 4 / 6) + GUI.form_padding * 5,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
+    )
+    GUI.form_controls["Aira Items Label"] =
+        forms.label(
+        FORM,
+        "Aira Items",
+        GUI:col(left_form_width + right_form_width * 5 / 6) + GUI.form_padding * 6,
+        GUI:row(0),
+        GUI:width(right_form_width / 6),
+        GUI:height(1)
+    )
+    GUI.form_controls["Aira Items"] =
+        forms.label(
+        FORM,
+        blank,
+        GUI:col(left_form_width + right_form_width * 5 / 6) + GUI.form_padding * 6,
+        GUI:row(1),
+        GUI:width(right_form_width / 6),
+        GUI:height(12)
     )
 end
 
@@ -176,6 +257,12 @@ local function mainloop()
     forms.settext(GUI.form_controls["Z Value"], getPosZ())
     forms.settext(GUI.form_controls["Encount Value"], getEncountWalk())
     forms.settext(GUI.form_controls["Camera Value"], getCamera())
+    forms.settext(GUI.form_controls["Arus Items"], table2str(get_items(ADDRESS.ARUS_ITEM_1)))
+    forms.settext(GUI.form_controls["Kiefer Items"], table2str(get_items(ADDRESS.KIEFER_ITEM_1)))
+    forms.settext(GUI.form_controls["Maribel Items"], table2str(get_items(ADDRESS.MARIBEL_ITEM_1)))
+    forms.settext(GUI.form_controls["Gabo Items"], table2str(get_items(ADDRESS.GABO_ITEM_1)))
+    forms.settext(GUI.form_controls["Melvin Items"], table2str(get_items(ADDRESS.MELVIN_ITEM_1)))
+    forms.settext(GUI.form_controls["Aira Items"], table2str(get_items(ADDRESS.AIRA_ITEM_1)))
 end
 
 event.onframeend(mainloop, "test")
