@@ -5,7 +5,7 @@ Bizhawkで使うものとAviutlで使うものがあります。
 
 ## 動作確認
 
-- Bizhawk 2.4.2
+- Bizhawk 2.5.2
 - Aviutl 1.10
 
 ## 使用法
@@ -13,6 +13,7 @@ Bizhawkで使うものとAviutlで使うものがあります。
 ### Bizhawk
 
 Bizhawkで使うスクリプト。Tools -> Lua Consoleから使用する。
+
 #### guiInfo.lua
 
 ゲーム上の各パラメーターを別ウィンドウで参照できます。
@@ -20,6 +21,7 @@ Bizhawkで使うスクリプト。Tools -> Lua Consoleから使用する。
 #### record.lua
 
 TASの動画を録画する際に一緒に使うものです。
+参考: <https://jackjasonb.com/2021/01/25/dq7_tas_lua/>
 
 ```lua
 require "utils"
@@ -42,7 +44,7 @@ Aviutlで使うスクリプト。
 拡張編集の部分で右クリック->メディアオブジェクトの追加->カスタムオブジェクト->一番左下のドロップダウンボックスからdraw_aviutlを選択するとフレーム数に応じた各値が表示されます。
 また、このファイルの文字コードはShift-JIS、改行コードはCRLFに設定して下さい。
 
-#### draw_aviutl.lua 
+#### draw_aviutl.lua
 
 これはAviutlのテキストオブジェクトの文章部分に貼り付けるためのスクリプトです。
 Aviutlのテキストオブジェクトは`<? ?>`で囲んだ部分はスクリプトとみなされるので、その中に`draw_aviutl.lua`の中身をコピーします。すると上記のカスタムオブジェクトと同じように表示できます。
