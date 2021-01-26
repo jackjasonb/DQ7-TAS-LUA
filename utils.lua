@@ -18,11 +18,21 @@ ADDRESS = {
     MARIBEL_ITEM_1 = 0x010E60,
     GABO_ITEM_1 = 0x010F6C,
     MELVIN_ITEM_1 = 0x011184,
-    AIRA_ITEM_1 = 0x011078
+    AIRA_ITEM_1 = 0x011078,
+    GOLD1 = 0x0112D8,
+    GOLD2 = 0x0112DA
 }
 
 function dec2hex(input)
     return string.format("%04x", input)
+end
+
+function table2str(table)
+    local table_str = ""
+    for i = 1, #table do
+        table_str = table_str .. table[i] .. "\n"
+    end
+    return table_str
 end
 
 function getRNum()
@@ -104,10 +114,6 @@ function get_items(address)
     return items
 end
 
-function table2str(table)
-    local table_str = ""
-    for i = 1, #table do
-        table_str = table_str .. table[i] .. "\n"
-    end
-    return table_str
+function get_gold()
+    return memory.read_u32_le(ADDRESS.GOLD1)
 end

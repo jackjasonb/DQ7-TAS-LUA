@@ -3,11 +3,11 @@ require "utils"
 GUI = {
     form_controls = {},
     form_padding = 4,
-    form_width = 32,
-    form_height = 12,
+    form_width = 5 + 27,
+    form_height = 13,
     label_margin = 5,
     dropdown_offset = 1,
-    label_width = 20,
+    label_width = 25,
     button_height = 18
 }
 
@@ -36,7 +36,7 @@ function GUI:initGUI()
 
     local blank = "undefined"
     local row = 0
-    local left_form_width = GUI.form_width / 7
+    local left_form_width = 5
     -- random number
     GUI.form_controls["R Number Label"] =
         forms.label(FORM, "R_NUM: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
@@ -136,113 +136,114 @@ function GUI:initGUI()
         GUI:height(1)
     )
 
-    local right_form_width = GUI.form_width - left_form_width
-    GUI.form_controls["Arus Items Label"] =
-        forms.label(
-        FORM,
-        "Arus Items",
-        GUI:col(left_form_width) + GUI.form_padding,
-        GUI:row(0),
-        GUI:width(right_form_width / 6),
-        GUI:height(1)
-    )
-    GUI.form_controls["Arus Items"] =
+    row = row + 2
+    -- Gold
+    GUI.form_controls["Gold Label"] =
+        forms.label(FORM, "Gold: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+    GUI.form_controls["Gold Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width) + GUI.form_padding,
-        GUI:row(1),
-        GUI:width(right_form_width / 6),
-        GUI:height(12)
+        GUI:col(left_form_width / 2),
+        GUI:row(row),
+        GUI:width(left_form_width / 2),
+        GUI:height(1)
     )
+
+    local right_form_width = GUI.form_width - left_form_width
+    local item_width = GUI:width(right_form_width) / 6 - GUI.form_padding
+    GUI.form_controls["Arus Items Label"] =
+        forms.label(FORM, "Arus Items", GUI:col(left_form_width), GUI:row(0), item_width, GUI:height(1))
+    GUI.form_controls["Arus Items"] =
+        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(1), item_width, GUI:height(12))
     GUI.form_controls["Kiefer Items Label"] =
         forms.label(
         FORM,
         "Kiefer Items",
-        GUI:col(left_form_width + right_form_width / 6) + GUI.form_padding * 2,
+        GUI:col(left_form_width) + item_width + GUI.form_padding,
         GUI:row(0),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(1)
     )
     GUI.form_controls["Kiefer Items"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width + right_form_width / 6) + GUI.form_padding * 2,
+        GUI:col(left_form_width) + item_width + GUI.form_padding,
         GUI:row(1),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(12)
     )
     GUI.form_controls["Maribel Items Label"] =
         forms.label(
         FORM,
         "Maribel Items",
-        GUI:col(left_form_width + right_form_width * 2 / 6) + GUI.form_padding * 3,
+        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2,
         GUI:row(0),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(1)
     )
     GUI.form_controls["Maribel Items"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width + right_form_width * 2 / 6) + GUI.form_padding * 3,
+        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2,
         GUI:row(1),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(12)
     )
     GUI.form_controls["Gabo Items Label"] =
         forms.label(
         FORM,
         "Gabo Items",
-        GUI:col(left_form_width + right_form_width * 3 / 6) + GUI.form_padding * 4,
+        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
         GUI:row(0),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(1)
     )
     GUI.form_controls["Gabo Items"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width + right_form_width * 3 / 6) + GUI.form_padding * 4,
+        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
         GUI:row(1),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(12)
     )
     GUI.form_controls["Melvin Items Label"] =
         forms.label(
         FORM,
         "Melvin Items",
-        GUI:col(left_form_width + right_form_width * 4 / 6) + GUI.form_padding * 5,
+        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
         GUI:row(0),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(1)
     )
     GUI.form_controls["Melvin Items"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width + right_form_width * 4 / 6) + GUI.form_padding * 5,
+        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
         GUI:row(1),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(12)
     )
     GUI.form_controls["Aira Items Label"] =
         forms.label(
         FORM,
         "Aira Items",
-        GUI:col(left_form_width + right_form_width * 5 / 6) + GUI.form_padding * 6,
+        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
         GUI:row(0),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(1)
     )
     GUI.form_controls["Aira Items"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width + right_form_width * 5 / 6) + GUI.form_padding * 6,
+        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
         GUI:row(1),
-        GUI:width(right_form_width / 6),
+        item_width,
         GUI:height(12)
     )
 end
@@ -257,6 +258,7 @@ local function mainloop()
     forms.settext(GUI.form_controls["Z Value"], getPosZ())
     forms.settext(GUI.form_controls["Encount Value"], getEncountWalk())
     forms.settext(GUI.form_controls["Camera Value"], getCamera())
+    forms.settext(GUI.form_controls["Gold Value"], get_gold() .. "G")
     forms.settext(GUI.form_controls["Arus Items"], table2str(get_items(ADDRESS.ARUS_ITEM_1)))
     forms.settext(GUI.form_controls["Kiefer Items"], table2str(get_items(ADDRESS.KIEFER_ITEM_1)))
     forms.settext(GUI.form_controls["Maribel Items"], table2str(get_items(ADDRESS.MARIBEL_ITEM_1)))
