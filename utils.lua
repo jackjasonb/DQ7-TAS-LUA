@@ -1,7 +1,7 @@
 -- written by jackjasonb
 
 require "item"
-
+require "monster"
 ADDRESS = {
     R_NUM = 0x0F9BA0,
     POS_X = 0x0C7020,
@@ -9,10 +9,18 @@ ADDRESS = {
     ENCOUNT_WALK = 0x0F78DC,
     MAP_ID = 0x0F74D4,
     CAMERA = 0x0DB498,
-    ENEMY_1_HP = 0x0E5BBA,
-    ENEMY_2_HP = 0x0E5C66,
-    ENEMY_3_HP = 0x0E5D12,
-    ENEMY_4_HP = 0x0E5DBE,
+    ENEMY_1_HP = 0x0E5C66,
+    ENEMY_2_HP = 0x0E5D12,
+    ENEMY_3_HP = 0x0E5DBE,
+    ENEMY_4_HP = 0x0E5E6A,
+    ENEMY_1_NAME = 0x0E72F0,
+    ENEMY_2_NAME = 0x0E72F4,
+    ENEMY_3_NAME = 0x0E72F8,
+    ENEMY_4_NAME = 0x0E72FC,
+    ENEMY_1_NUM = 0x0E72F2,
+    ENEMY_2_NUM = 0x0E72F6,
+    ENEMY_3_NUM = 0x0E72FA,
+    ENEMY_4_NUM = 0x0E72FE,
     ARUS_ITEM_1 = 0x010C48,
     KIEFER_ITEM_1 = 0x010D54,
     MARIBEL_ITEM_1 = 0x010E60,
@@ -59,22 +67,6 @@ function getCamera()
     return memory.read_u32_le(ADDRESS.CAMERA)
 end
 
-function getEnemy1HP()
-    return memory.read_u16_le(ADDRESS.ENEMY_1_HP)
-end
-
-function getEnemy2HP()
-    return memory.read_u16_le(ADDRESS.ENEMY_2_HP)
-end
-
-function getEnemy3HP()
-    return memory.read_u16_le(ADDRESS.ENEMY_3_HP)
-end
-
-function getEnemy4HP()
-    return memory.read_u16_le(ADDRESS.ENEMY_4_HP)
-end
-
 function getTime()
     frame = emu.framecount()
     --hour
@@ -116,4 +108,32 @@ end
 
 function get_gold()
     return memory.read_u32_le(ADDRESS.GOLD1)
+end
+
+function get_enemy_name(num)
+    local enemy_num = memory.read_u16_le(ADDRESS.ENEMY_1_NUM)
+    local enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_1_NAME))]
+    if enemy_num < num then
+        enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_2_NAME))]
+        num = num - enemy_num
+        enemy_num = memory.read_u16_le(ADDRESS.ENEMY_2_NUM)
+        if enemy_num < num then
+            enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_3_NAME))]
+            num = num - enemy_num
+            enemy_num = memory.read_u16_le(ADDRESS.ENEMY_3_NUM)
+            if enemy_num < num then
+                enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_4_NAME))]
+            end
+        end
+    end
+
+    if enemy then
+        return enemy
+    else
+        return ""
+    end
+end
+
+function get_enemy_HP(address)
+    return memory.read_u16_le(address)
 end
