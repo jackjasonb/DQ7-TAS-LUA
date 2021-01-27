@@ -2,11 +2,11 @@ require "utils"
 
 GUI = {
     form_controls = {},
-    form_width = 5 + 27,
+    form_width = 32,
     form_height = 16,
     form_padding = 4,
-    label_width = 26,
-    button_height = 18
+    label_width = 27 * 2,
+    button_height = 18 * 2
 }
 
 local function round(num, idp)
@@ -150,6 +150,7 @@ function GUI:initGUI()
 
     local right_form_width = GUI.form_width - left_form_width
     local item_width = GUI:width(right_form_width) / 6 - GUI.form_padding
+
     GUI.form_controls["Arus Items Label"] =
         forms.label(FORM, "Arus Items", GUI:col(left_form_width), GUI:row(0), item_width, GUI:height(1))
     GUI.form_controls["Arus Items"] =

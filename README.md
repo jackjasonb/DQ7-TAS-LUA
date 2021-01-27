@@ -20,6 +20,9 @@ Bizhawkで使うスクリプト。Tools -> Lua Consoleから使用する。
 
 ゲーム上の各パラメーターを別ウィンドウで参照できます。
 
+#### guiInfo_high_dpi.lua
+
+上記、guiInfoの高解像度ディスプレイ用。Windowsで高解像度のモニター等でスケーリングを使っているときにはこちらを使う。
 #### record.lua
 
 TASの動画を録画する際に一緒に使うものです。
