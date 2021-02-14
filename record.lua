@@ -1,7 +1,7 @@
 require "utils"
 
-START_FRAME = 1000
-STOP_FRAME = 100000
+START_FRAME = 91441
+STOP_FRAME = 92000
 
 local function start(frame)
     if frame == START_FRAME then
@@ -40,6 +40,7 @@ local function mainloop()
     end
     file:close()
     console.log("file close")
+    client.pause()
 end
 
 mainloop()
