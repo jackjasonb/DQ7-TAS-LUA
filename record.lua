@@ -1,7 +1,7 @@
 require "utils"
 
-START_FRAME = 0
-STOP_FRAME = 91440
+START_FRAME = 1000
+STOP_FRAME = 100000
 
 local function start(frame)
     if frame == START_FRAME then
@@ -23,6 +23,7 @@ local function mainloop()
     local frame = emu.framecount()
 
     while start(frame) do
+        frame = emu.framecount()
         emu.frameadvance()
     end
 
