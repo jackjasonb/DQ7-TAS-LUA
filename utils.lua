@@ -9,10 +9,11 @@ ADDRESS = {
     ENCOUNT_WALK = 0x0F78DC,
     MAP_ID = 0x0F74D4,
     CAMERA = 0x0DB498,
-    ENEMY_1_HP = 0x0E5C66,
-    ENEMY_2_HP = 0x0E5D12,
-    ENEMY_3_HP = 0x0E5DBE,
-    ENEMY_4_HP = 0x0E5E6A,
+    ENEMY_1_HP = 0x0E5BBA,
+    ENEMY_2_HP = 0x0E5C66,
+    ENEMY_3_HP = 0x0E5D12,
+    ENEMY_4_HP = 0x0E5DBE,
+    ENEMY_5_HP = 0x0E5E6A,
     ENEMY_1_NAME = 0x0E72F0,
     ENEMY_2_NAME = 0x0E72F4,
     ENEMY_3_NAME = 0x0E72F8,
@@ -90,7 +91,7 @@ function get_items(address)
     local equip = false
     for i = 0, 11 do
         local item = memory.read_u16_le(address + i * 2)
-        -- ã‚¢ã‚¤ãƒ†ãƒ è£…å‚™æ™‚ã¯ã‚¢ã‚¤ãƒ†ãƒ ã®å€¤ã«0x0400ãŒåŠ ç®—ã•ã‚Œã‚‹
+        -- ƒAƒCƒeƒ€‘•”õŽž‚ÍƒAƒCƒeƒ€‚Ì’l‚É0x0400‚ª‰ÁŽZ‚³‚ê‚é
         if item > 1024 then
             item = item - 1024
             equip = true
@@ -111,27 +112,31 @@ function get_gold()
 end
 
 function get_enemy_name(num)
-    local enemy_num = memory.read_u16_le(ADDRESS.ENEMY_1_NUM)
-    local enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_1_NAME))]
-    if enemy_num < num then
-        enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_2_NAME))]
-        num = num - enemy_num
-        enemy_num = memory.read_u16_le(ADDRESS.ENEMY_2_NUM)
-        if enemy_num < num then
-            enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_3_NAME))]
-            num = num - enemy_num
-            enemy_num = memory.read_u16_le(ADDRESS.ENEMY_3_NUM)
-            if enemy_num < num then
-                enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(ADDRESS.ENEMY_4_NAME))]
-            end
+    local enemy_num_addresses ={
+        ADDRESS.ENEMY_1_NUM,
+        ADDRESS.ENEMY_2_NUM,
+        ADDRESS.ENEMY_3_NUM,
+        ADDRESS.ENEMY_4_NUM
+    }
+    local enemy_name_addresses ={
+        ADDRESS.ENEMY_1_NAME,
+        ADDRESS.ENEMY_2_NAME,
+        ADDRESS.ENEMY_3_NAME,
+        ADDRESS.ENEMY_4_NAME
+    }
+    local i = 1
+    local enemy =""
+    while num>0 do
+        num = num - 1
+        enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(enemy_name_addresses[i]))]
+        if num <= 0 then
+            break
         end
+        local enemy_num = memory.read_u16_le(enemy_num_addresses[i])
+        num = num - enemy_num
+        i = i + 1
     end
-
-    if enemy then
-        return enemy
-    else
-        return ""
-    end
+    return enemy
 end
 
 function get_enemy_HP(address)
