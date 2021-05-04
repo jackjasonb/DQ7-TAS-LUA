@@ -28,6 +28,12 @@ ADDRESS = {
     GABO_ITEM_1 = 0x010F6C,
     MELVIN_ITEM_1 = 0x011184,
     AIRA_ITEM_1 = 0x011078,
+    ARUS_EXP = 0x010c6c,
+    KIEFER_EXP = 0x010d78,
+    MARIBEL_EXP = 0x010e84,
+    GABO_EXP = 0x010f90,
+    MELVIN_EXP = 0x0111a8,
+    AIRA_EXP = 0x01109c,
     GOLD1 = 0x0112D8,
     GOLD2 = 0x0112DA
 }
@@ -126,13 +132,14 @@ function get_enemy_name(num)
     }
     local i = 1
     local enemy =""
+    local enemy_num = memory.read_u16_le(enemy_num_addresses[i])
+    if enemy_num == 0 then
+        return enemy
+    end
     while num>0 do
         num = num - 1
         enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(enemy_name_addresses[i]))]
-        if num <= 0 then
-            break
-        end
-        local enemy_num = memory.read_u16_le(enemy_num_addresses[i])
+        enemy_num = memory.read_u16_le(enemy_num_addresses[i])
         num = num - enemy_num
         i = i + 1
     end
@@ -141,4 +148,8 @@ end
 
 function get_enemy_HP(address)
     return memory.read_u16_le(address)
+end
+
+function get_exp(address)
+    return memory.read_u32_le(address)
 end

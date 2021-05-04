@@ -155,6 +155,9 @@ function GUI:initGUI()
         forms.label(FORM, "Arus Items", GUI:col(left_form_width), GUI:row(0), item_width, GUI:height(1))
     GUI.form_controls["Arus Items"] =
         forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(1), item_width, GUI:height(8))
+    GUI.form_controls["Arus EXP"] =
+        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(9), item_width, GUI:height(1))
+    
     GUI.form_controls["Kiefer Items Label"] =
         forms.label(
         FORM,
@@ -173,6 +176,16 @@ function GUI:initGUI()
         item_width,
         GUI:height(8)
     )
+    GUI.form_controls["Kiefer EXP"] =
+        forms.label(
+        FORM, 
+        blank, 
+        GUI:col(left_form_width) + item_width + GUI.form_padding, 
+        GUI:row(9), 
+        item_width, 
+        GUI:height(1)
+    )
+    
     GUI.form_controls["Maribel Items Label"] =
         forms.label(
         FORM,
@@ -191,6 +204,16 @@ function GUI:initGUI()
         item_width,
         GUI:height(8)
     )
+    GUI.form_controls["Maribel EXP"] =
+        forms.label(
+        FORM, 
+        blank, 
+        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2, 
+        GUI:row(9), 
+        item_width, 
+        GUI:height(1)
+    )
+
     GUI.form_controls["Gabo Items Label"] =
         forms.label(
         FORM,
@@ -209,6 +232,16 @@ function GUI:initGUI()
         item_width,
         GUI:height(8)
     )
+    GUI.form_controls["Gabo EXP"] =
+        forms.label(
+        FORM, 
+        blank, 
+        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
+        GUI:row(9), 
+        item_width, 
+        GUI:height(1)
+    )
+
     GUI.form_controls["Melvin Items Label"] =
         forms.label(
         FORM,
@@ -227,6 +260,16 @@ function GUI:initGUI()
         item_width,
         GUI:height(8)
     )
+    GUI.form_controls["Melvin EXP"] =
+        forms.label(
+        FORM, 
+        blank, 
+        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
+        GUI:row(9), 
+        item_width, 
+        GUI:height(1)
+    )
+
     GUI.form_controls["Aira Items Label"] =
         forms.label(
         FORM,
@@ -244,6 +287,15 @@ function GUI:initGUI()
         GUI:row(1),
         item_width,
         GUI:height(8)
+    )
+    GUI.form_controls["Aira EXP"] =
+        forms.label(
+        FORM, 
+        blank, 
+        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
+        GUI:row(9), 
+        item_width, 
+        GUI:height(1)
     )
 
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
@@ -288,6 +340,13 @@ local function mainloop()
     forms.settext(GUI.form_controls["Gabo Items"], table2str(get_items(ADDRESS.GABO_ITEM_1)))
     forms.settext(GUI.form_controls["Melvin Items"], table2str(get_items(ADDRESS.MELVIN_ITEM_1)))
     forms.settext(GUI.form_controls["Aira Items"], table2str(get_items(ADDRESS.AIRA_ITEM_1)))
+    
+    forms.settext(GUI.form_controls["Arus EXP"], "exp." .. get_exp(ADDRESS.ARUS_EXP))
+    forms.settext(GUI.form_controls["Kiefer EXP"], "exp." .. get_exp(ADDRESS.KIEFER_EXP))
+    forms.settext(GUI.form_controls["Maribel EXP"], "exp." .. get_exp(ADDRESS.MARIBEL_EXP))
+    forms.settext(GUI.form_controls["Gabo EXP"], "exp." .. get_exp(ADDRESS.GABO_EXP))
+    forms.settext(GUI.form_controls["Melvin EXP"], "exp." .. get_exp(ADDRESS.MELVIN_EXP))
+    forms.settext(GUI.form_controls["Aira EXP"], "exp." .. get_exp(ADDRESS.AIRA_EXP))
 
     forms.settext(GUI.form_controls["Enemy1 Name"], "1. " .. get_enemy_name(1))
     forms.settext(GUI.form_controls["Enemy1 HP"], "   HP: " .. get_enemy_HP(ADDRESS.ENEMY_1_HP))
