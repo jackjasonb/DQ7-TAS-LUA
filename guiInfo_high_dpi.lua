@@ -347,7 +347,8 @@ local function mainloop()
     forms.settext(GUI.form_controls["Gabo EXP"], "exp." .. get_exp(ADDRESS.GABO_EXP))
     forms.settext(GUI.form_controls["Melvin EXP"], "exp." .. get_exp(ADDRESS.MELVIN_EXP))
     forms.settext(GUI.form_controls["Aira EXP"], "exp." .. get_exp(ADDRESS.AIRA_EXP))
-
+    
+    forms.settext(GUI.form_controls["Enemy Label"], "ENEMY:  TURN: " .. get_turn_now())
     forms.settext(GUI.form_controls["Enemy1 Name"], "1. " .. get_enemy_name(1))
     forms.settext(GUI.form_controls["Enemy1 HP"], "   HP: " .. get_enemy_HP(1))
     forms.settext(GUI.form_controls["Enemy2 Name"], "2. " .. get_enemy_name(2))

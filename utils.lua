@@ -4,11 +4,14 @@ require "item"
 require "monster"
 ADDRESS = {
     R_NUM = 0x0F9BA0,
+    -- à⁄ìÆä÷åW
     POS_X = 0x0C7020,
     POS_Z = 0x0C7028,
     ENCOUNT_WALK = 0x0F78DC,
     MAP_ID = 0x0F74D4,
     CAMERA = 0x0DB498,
+    -- êÌì¨ä÷åW
+    TURN = 0x0E75DC,
     ENEMY_1_HP = 0x0E5BBA,
     ENEMY_2_HP = 0x0E5C66,
     ENEMY_3_HP = 0x0E5D12,
@@ -22,20 +25,22 @@ ADDRESS = {
     ENEMY_2_NUM = 0x0E72F6,
     ENEMY_3_NUM = 0x0E72FA,
     ENEMY_4_NUM = 0x0E72FE,
+    -- ìπãÔä÷åW
     ARUS_ITEM_1 = 0x010C48,
     KIEFER_ITEM_1 = 0x010D54,
     MARIBEL_ITEM_1 = 0x010E60,
     GABO_ITEM_1 = 0x010F6C,
     MELVIN_ITEM_1 = 0x011184,
     AIRA_ITEM_1 = 0x011078,
+    GOLD1 = 0x0112D8,
+    GOLD2 = 0x0112DA,
+    -- åoå±íl
     ARUS_EXP = 0x010c6c,
     KIEFER_EXP = 0x010d78,
     MARIBEL_EXP = 0x010e84,
     GABO_EXP = 0x010f90,
     MELVIN_EXP = 0x0111a8,
     AIRA_EXP = 0x01109c,
-    GOLD1 = 0x0112D8,
-    GOLD2 = 0x0112DA
 }
 
 function dec2hex(input)
@@ -177,4 +182,8 @@ end
 
 function get_exp(address)
     return memory.read_u32_le(address)
+end
+
+function get_turn_now()
+    return memory.read_u16_le(ADDRESS.TURN) +  1
 end
