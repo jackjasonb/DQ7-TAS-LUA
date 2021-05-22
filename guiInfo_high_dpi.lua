@@ -358,7 +358,7 @@ local function mainloop()
     forms.settext(GUI.form_controls["Enemy4 HP"], "   HP: " .. get_enemy_HP(ADDRESS.ENEMY_4_HP))
 end
 
-event.onframeend(mainloop, "test")
+event.onframeend(mainloop)
 
 while true do
     emu.frameadvance()
