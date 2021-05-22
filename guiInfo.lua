@@ -353,7 +353,7 @@ local function mainloop()
     forms.settext(GUI.form_controls["Enemy2 HP"], "   HP: " .. get_enemy_HP(ADDRESS.ENEMY_2_HP))
     forms.settext(GUI.form_controls["Enemy3 Name"], "3. " .. get_enemy_name(3))
     forms.settext(GUI.form_controls["Enemy3 HP"], "   HP: " .. get_enemy_HP(ADDRESS.ENEMY_3_HP))
-    forms.settext(GUI.form_controls["Enemy4 Name"], get_enemy_name(4))
+    forms.settext(GUI.form_controls["Enemy4 Name"], "4. " .. get_enemy_name(4))
     forms.settext(GUI.form_controls["Enemy4 HP"], "   HP: " .. get_enemy_HP(ADDRESS.ENEMY_4_HP))
 end
 
