@@ -130,14 +130,15 @@ function get_enemy_name(num)
         ADDRESS.ENEMY_3_NAME,
         ADDRESS.ENEMY_4_NAME
     }
-    local i = 1
     local enemy =""
-    local enemy_num = memory.read_u16_le(enemy_num_addresses[i])
-    if enemy_num == 0 then
+    local all_enemy_num = get_all_enemy_num()
+    if num > all_enemy_num then
         return enemy
     end
+
+    local i = 1
+    local enemy_num = 0
     while num>0 do
-        num = num - 1
         enemy = MONSTER["m" .. string.format("%04X", memory.read_u16_le(enemy_name_addresses[i]))]
         enemy_num = memory.read_u16_le(enemy_num_addresses[i])
         num = num - enemy_num
@@ -146,8 +147,32 @@ function get_enemy_name(num)
     return enemy
 end
 
-function get_enemy_HP(address)
-    return memory.read_u16_le(address)
+function get_all_enemy_num()
+    local enemy_num_addresses ={
+        ADDRESS.ENEMY_1_NUM,
+        ADDRESS.ENEMY_2_NUM,
+        ADDRESS.ENEMY_3_NUM,
+        ADDRESS.ENEMY_4_NUM
+    }
+    num = 0
+    for i=1,4 do
+        num = num + memory.read_u16_le(enemy_num_addresses[i])
+    end
+    return num
+end 
+
+function get_enemy_HP(num)
+    local all_enemy_num = get_all_enemy_num()
+    if num > all_enemy_num then
+        return ""
+    end
+    local enemy_hp_addresses ={
+        ADDRESS.ENEMY_1_HP,
+        ADDRESS.ENEMY_2_HP,
+        ADDRESS.ENEMY_3_HP,
+        ADDRESS.ENEMY_4_HP
+    }
+    return memory.read_u16_le(enemy_hp_addresses[num])
 end
 
 function get_exp(address)
