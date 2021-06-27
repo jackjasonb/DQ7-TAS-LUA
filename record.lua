@@ -11,7 +11,7 @@ local function start(frame)
 end
 
 local function stop(frame)
-    if frame == STOP_FRAME then
+    if frame == STOP_FRAME+1 then
         return false
     end
     return true
@@ -22,13 +22,19 @@ local function mainloop()
     console.log("stop frame: " .. STOP_FRAME)
     local frame = emu.framecount()
 
+    client.pause_av()
+    
     while start(frame) do
         emu.frameadvance()
         frame = emu.framecount()
     end
 
+    client.unpause_av()
+
     local file = io.open("movie.csv", "w")
     console.log("file open")
+    client.pause()
+    console.log("Please check AVI/WAV Record.\nIf already recording, be unpoused")
     while stop(frame) do
         -- get values
         local time = getTime()
