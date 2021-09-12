@@ -1,9 +1,10 @@
-require "utils"
+-- rootからの相対パス
+require "./src/utils"
 
 GUI = {
     form_controls = {},
     form_width = 32,
-    form_height = 16,
+    form_height = 18,
     form_padding = 4,
     label_width = 27 * 2,
     button_height = 18 * 2
@@ -162,14 +163,16 @@ function GUI:initGUI()
                                                                      GUI:height(1))
         GUI.form_controls[PLAYER[i] .. " Items"] =
             forms.label(FORM, blank, column, GUI:row(1), item_width, GUI:height(8))
-        GUI.form_controls[PLAYER[i] .. " EXP"] =
-            forms.label(FORM, blank, column, GUI:row(9), item_width, GUI:height(1))
+        GUI.form_controls[PLAYER[i] .. " Name"] =
+            forms.label(FORM, PLAYER[i], column, GUI:row(9), item_width, GUI:height(1))
         GUI.form_controls[PLAYER[i] .. " HP"] =
             forms.label(FORM, blank, column, GUI:row(10), item_width, GUI:height(1))
+        GUI.form_controls[PLAYER[i] .. " EXP"] =
+            forms.label(FORM, blank, column, GUI:row(11), item_width, GUI:height(1))
     end
 
     -- Enemy Status
-    local enemy_row = 11
+    local enemy_row = 12 -- プレイヤーステータスを増やしたらここの値も変える
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
 
     GUI.form_controls["Enemy Label"] =

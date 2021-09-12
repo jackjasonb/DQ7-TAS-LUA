@@ -1,7 +1,8 @@
 -- written by jackjasonb
 
-require "item"
-require "monster"
+-- root‚©‚ç‚Ì‘Š‘ÎƒpƒX
+require "./src/item"
+require "./src/monster"
 
 ADDRESS = {
     R_NUM = 0x0F9BA0,

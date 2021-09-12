@@ -1,4 +1,4 @@
-require "gui"
+require "./src/gui"
 
 function main()
     GUI.label_width = 27

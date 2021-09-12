@@ -1,4 +1,4 @@
-require "utils"
+require "./src/utils"
 
 START_FRAME = 150245
 STOP_FRAME = 248050
