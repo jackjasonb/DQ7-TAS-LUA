@@ -41,6 +41,8 @@ ADDRESS = {
     GABO_EXP = 0x010f90,
     MELVIN_EXP = 0x0111a8,
     AIRA_EXP = 0x01109c,
+    -- ステータス
+    ARUS_HP = 0x010c7a,
 }
 
 function dec2hex(input)
@@ -186,4 +188,8 @@ end
 
 function get_turn_now()
     return memory.read_u16_le(ADDRESS.TURN) +  1
+end
+
+function get_player_hp(address)
+    return math.floor(memory.read_u16_le(address) / 16)
 end

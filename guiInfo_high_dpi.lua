@@ -157,6 +157,8 @@ function GUI:initGUI()
         forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(1), item_width, GUI:height(8))
     GUI.form_controls["Arus EXP"] =
         forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(9), item_width, GUI:height(1))
+    GUI.form_controls["Arus HP"] =
+        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(10), item_width, GUI:height(1))
     
     GUI.form_controls["Kiefer Items Label"] =
         forms.label(
@@ -298,31 +300,33 @@ function GUI:initGUI()
         GUI:height(1)
     )
 
+    local enemy_row = 11
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
+    
     GUI.form_controls["Enemy Label"] =
-        forms.label(FORM, "ENEMY:", GUI:col(left_form_width), GUI:row(10), enemy_width, GUI:height(1))
+        forms.label(FORM, "ENEMY:", GUI:col(left_form_width), GUI:row(enemy_row), enemy_width, GUI:height(1))
+    
     GUI.form_controls["Enemy1 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(11), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(enemy_row + 1), enemy_width, GUI:height(1))
     GUI.form_controls["Enemy1 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(12), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(enemy_row + 2), enemy_width, GUI:height(1))
 
     GUI.form_controls["Enemy2 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(11), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(enemy_row + 1), enemy_width, GUI:height(1))
     GUI.form_controls["Enemy2 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(12), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(enemy_row + 2), enemy_width, GUI:height(1))
 
     GUI.form_controls["Enemy3 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(11), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(enemy_row + 1), enemy_width, GUI:height(1))
     GUI.form_controls["Enemy3 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(12), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(enemy_row + 2), enemy_width, GUI:height(1))
 
     GUI.form_controls["Enemy4 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(11), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(enemy_row + 1), enemy_width, GUI:height(1))
     GUI.form_controls["Enemy4 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(12), enemy_width, GUI:height(1))
+        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(enemy_row + 2), enemy_width, GUI:height(1))
 end
 
-GUI.initGUI()
 
 local function mainloop()
     forms.settext(GUI.form_controls["R Number Value"], getRNum())
@@ -342,6 +346,7 @@ local function mainloop()
     forms.settext(GUI.form_controls["Aira Items"], table2str(get_items(ADDRESS.AIRA_ITEM_1)))
     
     forms.settext(GUI.form_controls["Arus EXP"], "exp." .. get_exp(ADDRESS.ARUS_EXP))
+    forms.settext(GUI.form_controls["Arus HP"], "HP: " .. get_player_hp(ADDRESS.ARUS_HP))
     forms.settext(GUI.form_controls["Kiefer EXP"], "exp." .. get_exp(ADDRESS.KIEFER_EXP))
     forms.settext(GUI.form_controls["Maribel EXP"], "exp." .. get_exp(ADDRESS.MARIBEL_EXP))
     forms.settext(GUI.form_controls["Gabo EXP"], "exp." .. get_exp(ADDRESS.GABO_EXP))
@@ -359,8 +364,13 @@ local function mainloop()
     forms.settext(GUI.form_controls["Enemy4 HP"], "   HP: " .. get_enemy_HP(4))
 end
 
-event.onframeend(mainloop)
 
-while true do
-    emu.frameadvance()
+function main()
+    GUI.initGUI()
+    event.onframeend(mainloop)
+    while true do
+        emu.frameadvance()
+    end
 end
+
+main()
