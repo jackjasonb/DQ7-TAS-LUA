@@ -220,9 +220,8 @@ end
 function get_player_mp(address)
     local value = memory.read_u16_le(address)
     -- ã‚©‚ç2Œ…–Ú‚ğ’Šo
-    local up2 = math.floor(value / (16 ^ 2)) % 16
-    console.log("a" .. up2)
-    return math.floor(value & 16 ^ 2) + up2 % 4 * (16 ^ 2)
+    local up2 = math.floor(value / (16 ^ 2)) % 16 % 4
+    return (value % (16^2)) + (up2 * (16 ^ 2))
 end
 
 function get_player_lv(address)
