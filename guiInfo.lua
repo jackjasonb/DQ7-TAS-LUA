@@ -148,180 +148,57 @@ function GUI:initGUI()
         GUI:height(1)
     )
 
+    
+    -- Player Status
     local right_form_width = GUI.form_width - left_form_width
     local item_width = GUI:width(right_form_width) / 6 - GUI.form_padding
-    GUI.form_controls["Arus Items Label"] =
-        forms.label(FORM, "Arus Items", GUI:col(left_form_width), GUI:row(0), item_width, GUI:height(1))
-    GUI.form_controls["Arus Items"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(1), item_width, GUI:height(8))
-    GUI.form_controls["Arus EXP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(9), item_width, GUI:height(1))
-    
-    GUI.form_controls["Kiefer Items Label"] =
-        forms.label(
-        FORM,
-        "Kiefer Items",
-        GUI:col(left_form_width) + item_width + GUI.form_padding,
-        GUI:row(0),
-        item_width,
-        GUI:height(1)
-    )
-    GUI.form_controls["Kiefer Items"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(left_form_width) + item_width + GUI.form_padding,
-        GUI:row(1),
-        item_width,
-        GUI:height(8)
-    )
-    GUI.form_controls["Kiefer EXP"] =
-        forms.label(
-        FORM, 
-        blank, 
-        GUI:col(left_form_width) + item_width + GUI.form_padding, 
-        GUI:row(9), 
-        item_width, 
-        GUI:height(1)
-    )
+    for i = 1, 6 do
+        local column = GUI:col(left_form_width) + (item_width + GUI.form_padding) * (i - 1)
+        GUI.form_controls[PLAYER[i] .. " Items Label"] = forms.label(FORM, 
+                                                                     PLAYER[i] .. " Items", 
+                                                                     column, 
+                                                                     GUI:row(0), 
+                                                                     item_width, 
+                                                                     GUI:height(1))
+        GUI.form_controls[PLAYER[i] .. " Items"] =
+            forms.label(FORM, blank, column, GUI:row(1), item_width, GUI:height(8))
+        GUI.form_controls[PLAYER[i] .. " EXP"] =
+            forms.label(FORM, blank, column, GUI:row(9), item_width, GUI:height(1))
+        GUI.form_controls[PLAYER[i] .. " HP"] =
+            forms.label(FORM, blank, column, GUI:row(10), item_width, GUI:height(1))
+    end
 
-    GUI.form_controls["Maribel Items Label"] =
-        forms.label(
-        FORM,
-        "Maribel Items",
-        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2,
-        GUI:row(0),
-        item_width,
-        GUI:height(1)
-    )
-    GUI.form_controls["Maribel Items"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2,
-        GUI:row(1),
-        item_width,
-        GUI:height(8)
-    )
-    GUI.form_controls["Maribel EXP"] =
-        forms.label(
-        FORM, 
-        blank, 
-        GUI:col(left_form_width) + item_width * 2 + GUI.form_padding * 2, 
-        GUI:row(9), 
-        item_width, 
-        GUI:height(1)
-    )
-
-    GUI.form_controls["Gabo Items Label"] =
-        forms.label(
-        FORM,
-        "Gabo Items",
-        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
-        GUI:row(0),
-        item_width,
-        GUI:height(1)
-    )
-    GUI.form_controls["Gabo Items"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
-        GUI:row(1),
-        item_width,
-        GUI:height(8)
-    )
-    GUI.form_controls["Gabo EXP"] =
-        forms.label(
-        FORM, 
-        blank, 
-        GUI:col(left_form_width) + item_width * 3 + GUI.form_padding * 3,
-        GUI:row(9), 
-        item_width, 
-        GUI:height(1)
-    )
-
-    GUI.form_controls["Melvin Items Label"] =
-        forms.label(
-        FORM,
-        "Melvin Items",
-        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
-        GUI:row(0),
-        item_width,
-        GUI:height(1)
-    )
-    GUI.form_controls["Melvin Items"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
-        GUI:row(1),
-        item_width,
-        GUI:height(8)
-    )
-    GUI.form_controls["Melvin EXP"] =
-        forms.label(
-        FORM, 
-        blank, 
-        GUI:col(left_form_width) + item_width * 4 + GUI.form_padding * 4,
-        GUI:row(9), 
-        item_width, 
-        GUI:height(1)
-    )
-
-    GUI.form_controls["Aira Items Label"] =
-        forms.label(
-        FORM,
-        "Aira Items",
-        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
-        GUI:row(0),
-        item_width,
-        GUI:height(1)
-    )
-    GUI.form_controls["Aira Items"] =
-        forms.label(
-        FORM,
-        blank,
-        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
-        GUI:row(1),
-        item_width,
-        GUI:height(8)
-    )
-    GUI.form_controls["Aira EXP"] =
-        forms.label(
-        FORM, 
-        blank, 
-        GUI:col(left_form_width) + item_width * 5 + GUI.form_padding * 5,
-        GUI:row(9), 
-        item_width, 
-        GUI:height(1)
-    )
-
+    -- Enemy Status
+    local enemy_row = 11
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
+
     GUI.form_controls["Enemy Label"] =
-        forms.label(FORM, "ENEMY:", GUI:col(left_form_width), GUI:row(10), enemy_width, GUI:height(1))
-    GUI.form_controls["Enemy1 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(11), enemy_width, GUI:height(1))
-    GUI.form_controls["Enemy1 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width), GUI:row(12), enemy_width, GUI:height(1))
+        forms.label(FORM, 
+                    "ENEMY:", 
+                    GUI:col(left_form_width), 
+                    GUI:row(enemy_row), 
+                    enemy_width, 
+                    GUI:height(1))    
+    for i = 1, 4 do
+        local column = GUI:col(left_form_width) + enemy_width * (i - 1)
+        GUI.form_controls["Enemy" .. i .. " Name"] =
+            forms.label(FORM, 
+                        blank, 
+                        column, 
+                        GUI:row(enemy_row + 1), 
+                        enemy_width, 
+                        GUI:height(1))
+        GUI.form_controls["Enemy" .. i .. " HP"] =
+            forms.label(FORM, 
+                        blank, 
+                        column, 
+                        GUI:row(enemy_row + 2), 
+                        enemy_width, 
+                        GUI:height(1))
+    end
 
-    GUI.form_controls["Enemy2 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(11), enemy_width, GUI:height(1))
-    GUI.form_controls["Enemy2 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width, GUI:row(12), enemy_width, GUI:height(1))
-
-    GUI.form_controls["Enemy3 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(11), enemy_width, GUI:height(1))
-    GUI.form_controls["Enemy3 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 2, GUI:row(12), enemy_width, GUI:height(1))
-
-    GUI.form_controls["Enemy4 Name"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(11), enemy_width, GUI:height(1))
-    GUI.form_controls["Enemy4 HP"] =
-        forms.label(FORM, blank, GUI:col(left_form_width) + enemy_width * 3, GUI:row(12), enemy_width, GUI:height(1))
 end
 
-GUI.initGUI()
 
 local function mainloop()
     forms.settext(GUI.form_controls["R Number Value"], getRNum())
@@ -333,33 +210,33 @@ local function mainloop()
     forms.settext(GUI.form_controls["Camera Value"], getCamera())
     forms.settext(GUI.form_controls["Gold Value"], get_gold() .. "G")
 
-    forms.settext(GUI.form_controls["Arus Items"], table2str(get_items(ADDRESS.ARUS_ITEM_1)))
-    forms.settext(GUI.form_controls["Kiefer Items"], table2str(get_items(ADDRESS.KIEFER_ITEM_1)))
-    forms.settext(GUI.form_controls["Maribel Items"], table2str(get_items(ADDRESS.MARIBEL_ITEM_1)))
-    forms.settext(GUI.form_controls["Gabo Items"], table2str(get_items(ADDRESS.GABO_ITEM_1)))
-    forms.settext(GUI.form_controls["Melvin Items"], table2str(get_items(ADDRESS.MELVIN_ITEM_1)))
-    forms.settext(GUI.form_controls["Aira Items"], table2str(get_items(ADDRESS.AIRA_ITEM_1)))
-
-    forms.settext(GUI.form_controls["Arus EXP"], "exp." .. get_exp(ADDRESS.ARUS_EXP))
-    forms.settext(GUI.form_controls["Kiefer EXP"], "exp." .. get_exp(ADDRESS.KIEFER_EXP))
-    forms.settext(GUI.form_controls["Maribel EXP"], "exp." .. get_exp(ADDRESS.MARIBEL_EXP))
-    forms.settext(GUI.form_controls["Gabo EXP"], "exp." .. get_exp(ADDRESS.GABO_EXP))
-    forms.settext(GUI.form_controls["Melvin EXP"], "exp." .. get_exp(ADDRESS.MELVIN_EXP))
-    forms.settext(GUI.form_controls["Aira EXP"], "exp." .. get_exp(ADDRESS.AIRA_EXP))
-
+    -- Player Info
+    for i = 1, 6 do
+        forms.settext(GUI.form_controls[PLAYER[i] .. " Items"], 
+                      table2str(get_items(ADDRESS[PLAYER[i]:upper() .. "_ITEM_1"])))
+        forms.settext(GUI.form_controls[PLAYER[i] .. " EXP"],
+                      "exp." .. get_exp(ADDRESS[PLAYER[i]:upper() .. "_EXP"]))
+        forms.settext(GUI.form_controls[PLAYER[i] .. " HP"],
+                      "HP: " .. get_player_hp(ADDRESS[PLAYER[i]:upper() .. "_HP"]))
+    end
+    
+    -- Enemy Info
     forms.settext(GUI.form_controls["Enemy Label"], "ENEMY:  TURN: " .. get_turn_now())
-    forms.settext(GUI.form_controls["Enemy1 Name"], "1. " .. get_enemy_name(1))
-    forms.settext(GUI.form_controls["Enemy1 HP"], "   HP: " .. get_enemy_HP(1))
-    forms.settext(GUI.form_controls["Enemy2 Name"], "2. " .. get_enemy_name(2))
-    forms.settext(GUI.form_controls["Enemy2 HP"], "   HP: " .. get_enemy_HP(2))
-    forms.settext(GUI.form_controls["Enemy3 Name"], "3. " .. get_enemy_name(3))
-    forms.settext(GUI.form_controls["Enemy3 HP"], "   HP: " .. get_enemy_HP(3))
-    forms.settext(GUI.form_controls["Enemy4 Name"], "4. " .. get_enemy_name(4))
-    forms.settext(GUI.form_controls["Enemy4 HP"], "   HP: " .. get_enemy_HP(4))
+    for i = 1, 4 do
+        forms.settext(GUI.form_controls["Enemy" .. i .. " Name"], "1. " .. get_enemy_name(i))
+        forms.settext(GUI.form_controls["Enemy" .. i .. " HP"], "   HP: " .. get_enemy_HP(i))
+    end
+
 end
 
-event.onframeend(mainloop)
 
-while true do
-    emu.frameadvance()
+function main()
+    GUI.initGUI()
+    event.onframeend(mainloop)
+    while true do
+        emu.frameadvance()
+    end
 end
+
+main()
+

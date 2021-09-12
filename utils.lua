@@ -2,6 +2,7 @@
 
 require "item"
 require "monster"
+
 ADDRESS = {
     R_NUM = 0x0F9BA0,
     -- 移動関係
@@ -43,7 +44,14 @@ ADDRESS = {
     AIRA_EXP = 0x01109c,
     -- ステータス
     ARUS_HP = 0x010c7a,
+    KIEFER_HP = 0x010d86,
+    MARIBEL_HP = 0x010e92,
+    GABO_HP = 0x010f9e,
+    MELVIN_HP = 0x0111b6,
+    AIRA_HP = 0x0110aa
 }
+
+PLAYER = {"Arus", "Kiefer", "Maribel", "Gabo", "Melvin", "Aira"}
 
 function dec2hex(input)
     return string.format("%04x", input)
