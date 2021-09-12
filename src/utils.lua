@@ -43,13 +43,27 @@ ADDRESS = {
     GABO_EXP = 0x010f90,
     MELVIN_EXP = 0x0111a8,
     AIRA_EXP = 0x01109c,
-    -- ステータス
+    -- HP
     ARUS_HP = 0x010c7a,
     KIEFER_HP = 0x010d86,
     MARIBEL_HP = 0x010e92,
     GABO_HP = 0x010f9e,
     MELVIN_HP = 0x0111b6,
-    AIRA_HP = 0x0110aa
+    AIRA_HP = 0x0110aa,
+    -- MP
+    ARUS_MP = 0x010c7c,
+    KIEFER_MP = 0x010d88,
+    MARIBEL_MP = 0x010e94,
+    GABO_MP = 0x010fa0,
+    MELVIN_MP = 0x0111b8,
+    AIRA_MP = 0x0110ac,
+    -- レベル
+    ARUS_LV = 0x010c6a,
+    KIEFER_LV = 0x010d76,
+    MARIBEL_LV = 0x010e82,
+    GABO_LV = 0x010f8e,
+    MELVIN_LV = 0x0111a6,
+    AIRA_LV = 0x01109a,
 }
 
 PLAYER = {"Arus", "Kiefer", "Maribel", "Gabo", "Melvin", "Aira"}
@@ -201,4 +215,16 @@ end
 
 function get_player_hp(address)
     return math.floor(memory.read_u16_le(address) / 16)
+end
+
+function get_player_mp(address)
+    local value = memory.read_u16_le(address)
+    -- 上から2桁目を抽出
+    local up2 = math.floor(value / (16 ^ 2)) % 16
+    console.log("a" .. up2)
+    return math.floor(value & 16 ^ 2) + up2 % 4 * (16 ^ 2)
+end
+
+function get_player_lv(address)
+    return math.floor(memory.read_u16_le(address) / 16) / 2
 end

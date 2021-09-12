@@ -167,12 +167,14 @@ function GUI:initGUI()
             forms.label(FORM, PLAYER[i], column, GUI:row(9), item_width, GUI:height(1))
         GUI.form_controls[PLAYER[i] .. " HP"] =
             forms.label(FORM, blank, column, GUI:row(10), item_width, GUI:height(1))
-        GUI.form_controls[PLAYER[i] .. " EXP"] =
+        GUI.form_controls[PLAYER[i] .. " MP"] =
             forms.label(FORM, blank, column, GUI:row(11), item_width, GUI:height(1))
+        GUI.form_controls[PLAYER[i] .. " EXP"] =
+            forms.label(FORM, blank, column, GUI:row(12), item_width, GUI:height(1))
     end
 
     -- Enemy Status
-    local enemy_row = 12 -- プレイヤーステータスを増やしたらここの値も変える
+    local enemy_row = 13 -- プレイヤーステータスを増やしたらここの値も変える
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
 
     GUI.form_controls["Enemy Label"] =
@@ -219,8 +221,12 @@ function mainloop()
                       table2str(get_items(ADDRESS[PLAYER[i]:upper() .. "_ITEM_1"])))
         forms.settext(GUI.form_controls[PLAYER[i] .. " EXP"],
                       "exp." .. get_exp(ADDRESS[PLAYER[i]:upper() .. "_EXP"]))
+        forms.settext(GUI.form_controls[PLAYER[i] .. " Name"],
+                      PLAYER[i] .. "  Lv." .. get_player_lv(ADDRESS[PLAYER[i]:upper() .. "_LV"]))
         forms.settext(GUI.form_controls[PLAYER[i] .. " HP"],
                       "HP: " .. get_player_hp(ADDRESS[PLAYER[i]:upper() .. "_HP"]))
+        forms.settext(GUI.form_controls[PLAYER[i] .. " MP"],
+                      "MP: " .. get_player_mp(ADDRESS[PLAYER[i]:upper() .. "_MP"]))
     end
     
     -- Enemy Info
