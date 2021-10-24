@@ -1,7 +1,7 @@
 require "./src/utils"
 
-START_FRAME = 150245
-STOP_FRAME = 248050
+START_FRAME = 248051
+STOP_FRAME = 332210
 
 local function start(frame)
     if frame == START_FRAME then
