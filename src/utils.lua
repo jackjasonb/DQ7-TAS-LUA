@@ -203,7 +203,7 @@ function get_enemy_HP(num)
         ADDRESS.ENEMY_4_HP
     }
     hp = memory.read_u16_le(enemy_hp_addresses[num])
-    if hp == 65000 and num == 1 then
+    if hp > 30000 and num == 1 then
         hp = memory.read_u16_le(enemy_hp_addresses[num + 1])
     end
     return hp
