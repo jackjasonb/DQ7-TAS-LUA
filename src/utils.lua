@@ -202,7 +202,11 @@ function get_enemy_HP(num)
         ADDRESS.ENEMY_3_HP,
         ADDRESS.ENEMY_4_HP
     }
-    return memory.read_u16_le(enemy_hp_addresses[num])
+    hp = memory.read_u16_le(enemy_hp_addresses[num])
+    if hp == 65000 and num == 1 then
+        hp = memory.read_u16_le(enemy_hp_addresses[num + 1])
+    end
+    return hp
 end
 
 function get_exp(address)
