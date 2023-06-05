@@ -270,7 +270,7 @@ luac.out
 
 ./ScriptHawk
 ./ScriptHawk/**
-*.csv
+# *.csv
 !script/
 !script/**
 
