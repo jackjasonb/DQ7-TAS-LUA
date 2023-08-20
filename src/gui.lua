@@ -35,126 +35,128 @@ function GUI:initGUI()
 
     local blank = "undefined"
     local row = 0
-    local left_form_width = GUI.form_width / 7
+    local one_column_width = GUI.form_width / 7
+
     -- random number
     GUI.form_controls["R Number Label"] =
-        forms.label(FORM, "R_NUM: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "R_NUM: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["R Number Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
-
     row = row + 2
+
     -- frame
     GUI.form_controls["Frame Label"] =
-        forms.label(FORM, "Frame: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "Frame: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["Frame Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
-
     row = row + 1
+
     -- time
     GUI.form_controls["Time Label"] =
-        forms.label(FORM, "Time: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "Time: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["Time Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
-
     row = row + 2
+
     -- Position
     GUI.form_controls["X Label"] =
-        forms.label(FORM, "X:", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 8), GUI:height(1))
+        forms.label(FORM, "X:", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 8), GUI:height(1))
     GUI.form_controls["X Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 8),
+        GUI:col(one_column_width / 8),
         GUI:row(row),
-        GUI:col(left_form_width / 4),
+        GUI:col(one_column_width / 4),
         GUI:height(1)
     )
     GUI.form_controls["Z Label"] =
         forms.label(
         FORM,
         "Z:",
-        GUI:col(left_form_width * 3 / 8) + GUI.form_padding,
+        GUI:col(one_column_width * 3 / 8) + GUI.form_padding,
         GUI:row(row),
-        GUI:width(left_form_width / 8),
+        GUI:width(one_column_width / 8),
         GUI:height(1)
     )
     GUI.form_controls["Z Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width * 1 / 2) + GUI.form_padding * 2,
+        GUI:col(one_column_width * 1 / 2) + GUI.form_padding * 2,
         GUI:row(row),
-        GUI:width(left_form_width / 4),
+        GUI:width(one_column_width / 4),
         GUI:height(1)
     )
     row = row + 1
+
     -- encount walk
     GUI.form_controls["Encount Label"] =
-        forms.label(FORM, "Encount Walk: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "Encount Walk: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["Encount Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
     row = row + 1
+
     -- Camera
     GUI.form_controls["Camera Label"] =
-        forms.label(FORM, "Camera: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "Camera: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["Camera Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
-
     row = row + 2
+
     -- Gold
     GUI.form_controls["Gold Label"] =
-        forms.label(FORM, "Gold: ", GUI:col(0), GUI:row(row), GUI:width(left_form_width / 2), GUI:height(1))
+        forms.label(FORM, "Gold: ", GUI:col(0), GUI:row(row), GUI:width(one_column_width / 2), GUI:height(1))
     GUI.form_controls["Gold Value"] =
         forms.label(
         FORM,
         blank,
-        GUI:col(left_form_width / 2),
+        GUI:col(one_column_width / 2),
         GUI:row(row),
-        GUI:width(left_form_width / 2),
+        GUI:width(one_column_width / 2),
         GUI:height(1)
     )
 
-    
     -- Player Status
-    local right_form_width = GUI.form_width - left_form_width
+    local right_form_width = GUI.form_width - one_column_width
     local item_width = GUI:width(right_form_width) / 6 - GUI.form_padding
     for i = 1, 6 do
-        local column = GUI:col(left_form_width) + (item_width + GUI.form_padding) * (i - 1)
+        local column = GUI:col(one_column_width) + (item_width + GUI.form_padding) * (i - 1)
         GUI.form_controls[PLAYER[i] .. " Items Label"] = forms.label(FORM, 
                                                                      PLAYER[i] .. " Items", 
                                                                      column, 
@@ -177,15 +179,14 @@ function GUI:initGUI()
     local enemy_row = 13 -- プレイヤーステータスを増やしたらここの値も変える
     local enemy_width = GUI:width(right_form_width) / 4 - GUI.form_padding
 
-    GUI.form_controls["Enemy Label"] =
-        forms.label(FORM, 
+    GUI.form_controls["Enemy Label"] = forms.label(FORM, 
                     "ENEMY:", 
-                    GUI:col(left_form_width), 
+                    GUI:col(one_column_width), 
                     GUI:row(enemy_row), 
                     enemy_width, 
                     GUI:height(1))    
     for i = 1, 4 do
-        local column = GUI:col(left_form_width) + enemy_width * (i - 1)
+        local column = GUI:col(one_column_width) + enemy_width * (i - 1)
         GUI.form_controls["Enemy" .. i .. " Name"] =
             forms.label(FORM, 
                         blank, 
@@ -228,7 +229,7 @@ function mainloop()
         forms.settext(GUI.form_controls[PLAYER[i] .. " MP"],
                       "MP: " .. get_player_mp(ADDRESS[PLAYER[i]:upper() .. "_MP"]))
     end
-    
+
     -- Enemy Info
     forms.settext(GUI.form_controls["Enemy Label"], "ENEMY:  TURN: " .. get_turn_now())
     for i = 1, 4 do

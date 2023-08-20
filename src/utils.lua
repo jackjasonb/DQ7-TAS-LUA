@@ -14,11 +14,11 @@ ADDRESS = {
     CAMERA = 0x0DB498,
     -- í“¬ŠÖŒW
     TURN = 0x0E75DC,
-    ENEMY_1_HP = 0x0E5BBA,
-    ENEMY_2_HP = 0x0E5C66,
-    ENEMY_3_HP = 0x0E5D12,
-    ENEMY_4_HP = 0x0E5DBE,
-    ENEMY_5_HP = 0x0E5E6A,
+    ENEMY_1_HP = 0x0E5C66,
+    ENEMY_2_HP = 0x0E5D12,
+    ENEMY_3_HP = 0x0E5DBE,
+    ENEMY_4_HP = 0x0E5E6A,
+    ENEMY_5_HP = 0x0E5F16,
     ENEMY_1_NAME = 0x0E72F0,
     ENEMY_2_NAME = 0x0E72F4,
     ENEMY_3_NAME = 0x0E72F8,
@@ -27,6 +27,8 @@ ADDRESS = {
     ENEMY_2_NUM = 0x0E72F6,
     ENEMY_3_NUM = 0x0E72FA,
     ENEMY_4_NUM = 0x0E72FE,
+    -- —^‚¦‚½ƒ_ƒ[ƒW‚Ì’l
+    DAMAGE = 0x0E5870,
     -- “¹‹ïŠÖŒW
     ARUS_ITEM_1 = 0x010C48,
     KIEFER_ITEM_1 = 0x010D54,
@@ -193,9 +195,9 @@ end
 
 function get_enemy_HP(num)
     local all_enemy_num = get_all_enemy_num()
-    if num > all_enemy_num then
-        return ""
-    end
+    -- if num > all_enemy_num then
+    --     return ""
+    -- end
     local enemy_hp_addresses ={
         ADDRESS.ENEMY_1_HP,
         ADDRESS.ENEMY_2_HP,
